@@ -65,7 +65,9 @@ class Minecraft::RCON::Client
     raise Error.new("You must be logged in before executing commands!") unless @logged_in
     packet = Packet.new(next_request_id, :command, command)
     send(packet)
-    receive
+
+    payload = receive.payload
+    String.new(payload)
   end
 
   # :ditto:
